@@ -1,0 +1,29 @@
+< 쇼핑 몰 프로젝트 설계 >
+
+# 2022년 05월 10일 (화) 작업
+1. 관리자의 영역, 사용자의 영역으로 나누어서 java 파일과 JSP 파일을 관리
+(1) src : JAVA 파일 관리 - 패키지를 나누어서 관리
+-- DTO(Data Transfer Object), VO(Value Object), DataBean : 
+-- DAO(Data Access Object), DBBean : 
+
+
+- manager : 관리자의 영역
+- mall : 사용자의 영역
+
+- manager : logon, product
+- mall : 
+
+(2) WebContent : JSP 파일을 관리
+- manager : 관리자의 영역
+- mall : 사용자의 영역
+
+- manager : logon, product
+- mall : 
+
+
+# 2022년 05월 11일 (수) 작업 일지.
+1. JDBCUtil, ManagerDAO 클래스 작성 -> 관리자 로그인 확인
+2. managerMain.jsp 페이지 작성 -> 관리자의 역할을 기능별로 메뉴로 생성
+-> 상품관리, 회원관리, 주문관리
+
+
