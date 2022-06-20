@@ -12,7 +12,7 @@
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <style>
 
-#container{width:100%; margin:0 auto;}
+#container{width:95%; margin:0 auto;}
 
 /* 신상품   */
 .new_items{text-align:center;} 
@@ -87,8 +87,8 @@ List<ProductDTO> goodProductList = productDAO.getProductList(nProducts2);
 	</div>
 	<div><%-- 메인 (본문)--%>
 		<main>
-			<div class="main1_image"><img src="../../background/main1.png" width="600" height="600"><div class="m1_d">Film Camera<div class="m1_a"><a href="../shopping/shopContent.jsp?product_id=4">show</a></div></div></div>
-			<div class="main2_image"><img src="../../background/main2.png" width="600" height="600"><div class="m2_d">Digital Camera<div class="m2_a"><a href="#">show</a></div></div></div>
+			<div class="main1_image"><img src="../../background/main1.png" width="600" height="600"><div class="m1_d">Film Camera<div class="m1_a"><a href="../shopping/shopContent.jsp?product_id=3">show</a></div></div></div>
+			<div class="main2_image"><img src="../../background/main2.png" width="600" height="600"><div class="m2_d">Digital Camera<div class="m2_a"><a href="../shopping/shopContent.jsp?product_id=105">show</a></div></div></div>
 			<article class="good_items"> <%-- 메인2 : 모든 상품에서 신상품 한 개씩을 가져온다 slick으로 노출   --%>
 				<h3>추천 상품</h3>
 				<div class="slider">

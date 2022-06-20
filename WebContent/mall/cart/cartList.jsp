@@ -10,7 +10,7 @@
 <title>장바구니 목록</title>
 <style>
 
-.container { width:1200px; margin : 0 auto;}
+.container { width:95%; margin : 0 auto;}
 /* 상단 1  */
 .d2 { width:40%; padding:15px; margin: 15px 45px; float:left; display: inline-block;}
 .d2 .s1 { font-size:1.1em; font-weight: bold; margin-right: 30px;}
@@ -208,6 +208,8 @@ cursor:pointer; border-radius: 5px;}
 			c3_s1.innerHTML = p_s1.toLocaleString() + '원';
 			c1_s2.innerHTML = p_s2.toLocaleString() + '원';
 			c1_s3.innerHTML = p_s3.toLocaleString() + '원';
+			c1_s4.innerHTML = k_count + "총";
+			c1_s5.innerHTML = p_count;
 			console.log(cart_ids_list);
 		})			
 	

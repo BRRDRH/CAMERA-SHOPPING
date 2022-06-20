@@ -8,7 +8,7 @@
 <title>상품상세</title>
 <style>
 
-.container {width: 100%; margin: 0 auto;}
+.container {width: 95%; margin: 0 auto;}
 .d_kind {margin-top: 30px; margin-left: 200px; margin-bottom: 50px;}
 
 .d_kind a { text-decoration:none; color: #32aaff; font-weight:bold; margin: 40px; font-size:18px; }
@@ -252,12 +252,10 @@ int sale_price = price - (price * d_rate/100);
 
 
 // 개인 쇼핑몰에서 이미지가  5장이고, 1번만 not null이고, 나머지가  nothing.jpg가 저장되어 있다고 가정할 때
-/*
 String product_image1 = product.getProduct_image1();
-if(product.getProduct_image2().equals("nothing.jpg")) product.setProduct_image2(product_image1);
-if(product.getProduct_image3().equals("nothing.jpg")) product.setProduct_image3(product_image1);
-if(product.getProduct_image4().equals("nothing.jpg")) product.setProduct_image4(product_image1);
-*/
+if(product.getProduct_image2() == null) product.setProduct_image2(product_image1);
+if(product.getProduct_image3() == null) product.setProduct_image3(product_image1);
+
 %>
 </head>
 <body>
@@ -295,6 +293,7 @@ if(product.getProduct_image4().equals("nothing.jpg")) product.setProduct_image4(
 				<div class="s2_d3"><span class="ss">정가</span><span><%=df.format(product.getProduct_price()) %>원</span></div>
 				<div class="s2_d4"><span class="ss">판매가</span><span><b><%=df.format(sale_price) %>원</b></span></div>
 				<div class="s2_d5"><span class="ss">할인율</span><span><b><%=product.getDiscount_rate() %>%</b></span></div>
+				<div class="s2_d6"><span class="ss">컬러</span><span><b><%=product.getProduct_color() %></b></span></div>
 				<div class="s2_d6"><span class="ss">제조국</span><span><b><%=product.getProduct_country() %></b></span></div>
 				<div class="s2_d7"><span class="ss">구매수량</span><input type="number" name="buy_count" id="buy_count" value="1" min="1" max="99"></div>
 				<div class="s2_d8"><span class="ss">배송안내</span><br>

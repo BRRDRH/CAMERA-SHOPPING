@@ -8,7 +8,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Nanum+Brush+Script&family=Paytone+One&display=swap');
 
-#container{width:100%; margin:0 auto; }
+#container{width:95%; margin:0 auto; }
 a{text-decoration:none; color: #0064ff;}
 
 /* 상단 메인, 서브 타이틀  */

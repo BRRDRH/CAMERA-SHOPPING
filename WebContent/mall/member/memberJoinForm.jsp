@@ -10,7 +10,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Hammersmith+One&family=Nanum+Brush+Script&family=Paytone+One&display=swap');
 
-#container{width:100%; margin:0 auto;}
+#container{width:95%; margin:0 auto;}
 a{text-decoration:none; color:black;}
 input[type="text"],[type="password"]{height:20px;}
 
