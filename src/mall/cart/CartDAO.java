@@ -3,7 +3,6 @@ package mall.cart;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.*;
 
 import util.JDBCUtil;
@@ -86,6 +85,45 @@ public class CartDAO {
 		}
 		return cart;
 	}
+	
+	// 장바구니 -> 구매 확인, buyForm.jsp에서 사용
+		public List<CartDTO> getCartList(List<Integer> cart_id_list) {
+			String sql = "select * from cart where cart_id=?";
+			List<CartDTO> cartList = new ArrayList<CartDTO>();
+			CartDTO cart = null;
+			try {
+				conn = JDBCUtil.getConnection();
+				
+				for(int c_id : cart_id_list) {
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, c_id);
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						cart = new CartDTO();
+						cart.setCart_id(rs.getInt("cart_id"));
+						cart.setBuyer(rs.getString("buyer"));
+						cart.setProduct_id(rs.getInt("product_id"));
+						cart.setProduct_name(rs.getString("product_name"));
+						cart.setProduct_color(rs.getString("product_color"));
+						cart.setProduct_com(rs.getString("product_com"));
+						cart.setProduct_country(rs.getString("product_country"));
+						cart.setProduct_price(rs.getInt("product_price"));
+						cart.setDiscount_rate(rs.getInt("discount_rate"));
+						cart.setBuy_price(rs.getInt("buy_price"));
+						cart.setBuy_count(rs.getInt("buy_count"));
+						cart.setProduct_image1(rs.getString("product_image1"));
+						cartList.add(cart);
+					}
+				}
+			}catch (Exception e) {
+				System.out.println("=> getCartList(cart_id) 메소드 실행 에러");
+				e.printStackTrace();
+			} finally {
+				JDBCUtil.close(conn, pstmt, rs);
+			}
+			return cartList;
+		}
 	
 	
 	// 장바구니 목록 확인

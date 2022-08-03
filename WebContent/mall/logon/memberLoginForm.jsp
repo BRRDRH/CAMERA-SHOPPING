@@ -18,7 +18,7 @@ a{text-decoration:none; color: #0064ff;}
 .f_input .c_id, .c_pwd {height:45px; margin-top:20px; padding-left:5px;border-radius:10px;}
 .f_input .f_chk{text-align:left; margin: 10px 0 0 12px;  font-size:13px;color:gray; cursor:pointer;}
 .f_input input[name='id']::placeholder, 
-.f_input input[name='pwd']::placeholder { color: #5ad2ff; font-weight:bold; padding-left:4px;}
+.f_input input[name='pwd']::placeholder { color: black; font-weight:bold; padding-left:4px;}
 
 .f_input #btn_login{width:420px; height:47px; margin-top:25px; background: #5ad2ff; color:white; border-radius:10px; 
 font-size:0.9em;border:none; font-weight:bold; cursor:pointer; margin-bottom:10px;}

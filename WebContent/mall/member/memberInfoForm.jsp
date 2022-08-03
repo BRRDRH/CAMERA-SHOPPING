@@ -20,17 +20,17 @@ input[type="text"],[type="password"]{height:20px;}
 
 /* 중단 - 입력 테이블   */
 
-table{width:600px; border:1px solid black; border-collapse:collapse;  margin:0 auto;}
+table{width:600px; border-collapse:collapse;  margin:0 auto;}
 tr{height:70px;}
-td,th{border:1px solid black;}
-td{padding-left:10px;}
+td,th{border-bottom: 1px solid #fff;}
+td{padding-left:10px; background: lightgray;}
 th{background:#5ad2ff; color: white;}
 .c_id{background:#5ad2ff;}
 .s_id{color:red; font-size: 0.9em; padding-left:5px; }
 .addr_row{height:100px;}
 .addr_row input{margin:2px 0;}
 #btn_address{width:110px; height:28px; border:none; background:#5ad2ff;  font-size:12px;
-cursor:pointer; border-radius:8px;font-weight:bold; }
+cursor:pointer; border-radius:8px; color: #fff; font-weight:bold; }
 table span{font-size:11px;}
 
 /* 하단 - 가입, 취소 버튼*/

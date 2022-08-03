@@ -10,7 +10,7 @@
 <title>장바구니 목록</title>
 <style>
 
-.container { width:95%; margin : 0 auto;}
+.container { width: 99%; margin : 0 auto;}
 /* 상단 1  */
 .d2 { width:40%; padding:15px; margin: 15px 45px; float:left; display: inline-block;}
 .d2 .s1 { font-size:1.1em; font-weight: bold; margin-right: 30px;}
@@ -253,28 +253,28 @@ cursor:pointer; border-radius: 5px;}
 		// 삭제 버튼 처리
 		btn_delete_select.addEventListener("click", function(){
 			if(ck_count == 0) return;
-			location = 'cartDeletePro2.jsp?cart_ids_list=' + cart_ids_list;
+			location = 'cartDeletePro2.jsp?cart_id=' + cart_ids_list;
 		})
 		
 		btn_delete_select2.addEventListener("click", function(){
 			if(ck_count == 0) return;
-			location = 'cartDeletePro2.jsp?cart_ids_list=' + cart_ids_list;
+			location = 'cartDeletePro2.jsp?cart_id=' + cart_ids_list;
 		})
 		
 		// 주문 버튼 처리
 		btn_buy_select.addEventListener("click", function(){
 			if(ck_count == 0) return;
-			location = '../buy/buyForm.jsp?cart_ids_list=' + cart_ids_list;
+			location = '../buy/buyForm.jsp?cart_id=' + cart_ids_list;
 		})
 		
 		btn_buy_select2.addEventListener("click", function(){
 			if(ck_count == 0) return;
-			location = '../buy/buyForm.jsp?cart_ids_list=' + cart_ids_list;
+			location = '../buy/buyForm.jsp?cart_id=' + cart_ids_list;
 		})
 		
 		btn_buy_select3.addEventListener("click", function(){
 			if(ck_count == 0) return;
-			location = '../buy/buyForm.jsp?cart_ids_list=' + cart_ids_list;
+			location = '../buy/buyForm.jsp?cart_id=' + cart_ids_list;
 		})
 		
 		// 쇼핑 계속하기 버튼 처리

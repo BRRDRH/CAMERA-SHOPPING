@@ -16,7 +16,7 @@ if(memberId == null) {
 	return;
 }
 // 1. 삭제할 카드 아이디 값 획득
-String cart_ids_list = request.getParameter("cart_ids_list");
+String cart_ids_list = request.getParameter("cart_id");
 String[] cart_ids = cart_ids_list.split(",");
 
 // 2. DB 연동
