@@ -12,11 +12,11 @@
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <style>
 
-#container{width:95%; margin:0 auto;}
+#container{width: 95%; margin:0 auto;}
 
 /* 신상품   */
 .new_items{text-align:center;} 
-.new_items .slider{width:80%;}
+.new_items .slider{width:100%;}
 
 /* 소개 사진  */
 .main1_image { float: left; margin: 30px 0 50px 150px; position: relative;}
@@ -27,19 +27,19 @@
 font-size: 2em; font-weight: bold;cursor: pointer;}
 .m1_a { width: 200px; height: 50px; background: white; border-radius: 47%; line-height:40px;
 text-align: center; margin-top: 12px; padding: 5px;}
-.m1_a a { text-decoration: none; color: black; font-size: 25px;}
+.m1_a span { text-decoration: none; color: black; font-size: 25px;}
 
 .m1_d:hover .m1_a { background: black;}
-.m1_d:hover .m1_a a { color: white;}
+.m1_d:hover .m1_a span { color: white;}
 
 .m2_d {  right: 42px; top: 420px; text-align: center; position: absolute; color: white; 
 font-size: 2em; font-weight: bold;cursor: pointer;}
 .m2_a { width: 200px; height: 50px; background: white; border-radius: 47%; line-height:40px;
 text-align: center; margin-top: 12px; padding: 5px;}
-.m2_a a { text-decoration: none; color: black; font-size: 25px;}
+.m2_a span { text-decoration: none; color: black; font-size: 25px;}
 
 .m2_d:hover .m2_a { background: black;}
-.m2_d:hover .m2_a a { color: white;}
+.m2_d:hover .m2_a span { color: white;}
 
 
 /* 추천 상품  */
@@ -68,6 +68,16 @@ $(document).ready(function () {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function(){
+	let m1_a = document.querySelector(".m1_a");
+	let m2_a = document.querySelector(".m2_a");
+	m1_a.addEventListener("click", function(){
+		location="shopContent.jsp?product_id=3";
+	})
+	m2_a.addEventListener("click", function(){
+		location="shopContent.jsp?product_id=102";
+	})
+})
 
 </script>
 </head>
@@ -87,8 +97,8 @@ List<ProductDTO> goodProductList = productDAO.getProductList(nProducts2);
 	</div>
 	<div><%-- 메인 (본문)--%>
 		<main>
-			<div class="main1_image"><img src="../../background/main1.png" width="600" height="600"><div class="m1_d">Film Camera<div class="m1_a"><a href="../shopping/shopContent.jsp?product_id=3">show</a></div></div></div>
-			<div class="main2_image"><img src="../../background/main2.png" width="600" height="600"><div class="m2_d">Digital Camera<div class="m2_a"><a href="../shopping/shopContent.jsp?product_id=105">show</a></div></div></div>
+			<div class="main1_image"><img src="../../background/main1.png" width="600" height="600"><div class="m1_d">Film Camera<div class="m1_a"><span>show</span></div></div></div>
+			<div class="main2_image"><img src="../../background/main2.png" width="600" height="600"><div class="m2_d">Digital Camera<div class="m2_a"><span>show</span></div></div></div>
 			<article class="good_items"> <%-- 메인2 : 모든 상품에서 신상품 한 개씩을 가져온다 slick으로 노출   --%>
 				<h3>추천 상품</h3>
 				<div class="slider">

@@ -10,7 +10,7 @@
 <title>장바구니 목록</title>
 <style>
 
-.container { width: 99%; margin : 0 auto;}
+.container { width:95%; margin : 0 auto;}
 /* 상단 1  */
 .d2 { width:40%; padding:15px; margin: 15px 45px; float:left; display: inline-block;}
 .d2 .s1 { font-size:1.1em; font-weight: bold; margin-right: 30px;}
@@ -82,7 +82,6 @@ border: 1px solid #196ab3; clear: both; background: #e6f0fa ;}
 .t_cart_tot tr:first-child th:cth-of-type(7) { color: #a13b66;}
 
 .t_cart_tot tr:nth-child(2) { font-size: 0.8em;}
-.s_color { color: gray;}
 .t_cart_tot tr:nth-child(2) span{  font-weight: nomal;}
 .t_cart_tot tr:nth-child(2) span b { color: #a13b66;}
 .t_cart_tot tr:nth-child(2) th { border-top: 1px solid #196ab3;}
@@ -144,7 +143,7 @@ cursor:pointer; border-radius: 5px;}
 		let btn_buy_ones = document.querySelectorAll(".btn_buy_one");
 		for(let i=0; i< btn_buy_ones.length; i++) {
 			btn_buy_ones[i].addEventListener("click", function(){
-				location = '../buy/buyForm.jsp?cart_id=' + cart_ids[i].value;
+				location = '../buy/buyForm.jsp?cart_id=' + cart_ids[i].value+"&part=3";
 			})
 		}
 		///////////////////////////
@@ -208,7 +207,7 @@ cursor:pointer; border-radius: 5px;}
 			c3_s1.innerHTML = p_s1.toLocaleString() + '원';
 			c1_s2.innerHTML = p_s2.toLocaleString() + '원';
 			c1_s3.innerHTML = p_s3.toLocaleString() + '원';
-			c1_s4.innerHTML = k_count + "총";
+			c1_s4.innerHTML = k_count + '종';
 			c1_s5.innerHTML = p_count;
 			console.log(cart_ids_list);
 		})			
@@ -264,17 +263,17 @@ cursor:pointer; border-radius: 5px;}
 		// 주문 버튼 처리
 		btn_buy_select.addEventListener("click", function(){
 			if(ck_count == 0) return;
-			location = '../buy/buyForm.jsp?cart_id=' + cart_ids_list;
+			location = '../buy/buyForm.jsp?cart_id=' + cart_ids_list +"&part=3";
 		})
 		
 		btn_buy_select2.addEventListener("click", function(){
 			if(ck_count == 0) return;
-			location = '../buy/buyForm.jsp?cart_id=' + cart_ids_list;
+			location = '../buy/buyForm.jsp?cart_id=' + cart_ids_list+"&part=3";
 		})
 		
 		btn_buy_select3.addEventListener("click", function(){
 			if(ck_count == 0) return;
-			location = '../buy/buyForm.jsp?cart_id=' + cart_ids_list;
+			location = '../buy/buyForm.jsp?cart_id=' + cart_ids_list+"&part=3";
 		})
 		
 		// 쇼핑 계속하기 버튼 처리
@@ -378,7 +377,7 @@ int p_count = 0; // 주문 상품 총 개수
 			 <img src="../../icons/progress01.PNG" width="450" height="70">
 		</div>
 		<div class="d2">
-			<span class="s1">EZENMALL 배송</span>
+			<span class="s1">CAMERA 배송</span>
 			<span class="s2">당일/하루/일반배송</span>
 			<span class="s3">아침배송</span>
 		</div>
@@ -433,7 +432,7 @@ int p_count = 0; // 주문 상품 총 개수
 				</td>
 				<td class="left td3" width="48%">
 					<span class="s1">
-						<a href="../shopping/shopContent.jsp?product_id=<%=cart.getProduct_id() %>"><%=cart.getProduct_name() %><span class="s_color"> - <%=cart.getProduct_color() %></span></a>
+						<a href="../shopping/shopContent.jsp?product_id=<%=cart.getProduct_id() %>"><%=cart.getProduct_name() %></a>
 					</span><br>
 					<span class="s2"><%=cart.getProduct_com() %> | <%=cart.getProduct_country() %></span><br>
 					<span class="s3"><%=df.format(product_price) %>원</span> | <span class="s4"><%=df.format(buy_price) %>원</span>(<span class="s5"><%=discount_rate %>% 할인</span>)
@@ -452,7 +451,7 @@ int p_count = 0; // 주문 상품 총 개수
 		</form>
 		<% } }%>
 		<tr>
-			<th colspan="7">EZENMALL 배송 상품 총 금액 : <b class="c1_s1"></b>(+배송비<b>0원</b>)</td>
+			<th colspan="7">CAMERA 배송 상품 총 금액 : <b class="c1_s1"></b>(+배송비<b>0원</b>)</td>
 		</tr>
 	</table>
 	<div class="d4"> 
@@ -474,7 +473,7 @@ int p_count = 0; // 주문 상품 총 개수
 		<tr>
 			<th colspan="7">
 				<span>정가<b class="c1_s2">0원</b>에서<b class="c1_s3">0원</b>할인</span><br>
-				<span>총 주문수량 : <b class="c1_s4">총</b> (<b class="c1_s5"></b>개)</span>
+				<span>총 주문수량 : <b class="c1_s4">종</b> (<b class="c1_s5"></b>개)</span>
 			</th>
 		</tr>
 	</table>

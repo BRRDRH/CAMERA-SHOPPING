@@ -18,9 +18,9 @@
 /* 상품 분류별 노출  */
 .d_kind3 {   float: left; text-align: center; margin-right: 28px; position:relative; font-size:0.9em;}
 .d_kind3 a {text-decoration:none; color:black;}
-.c_product{display:inline-block; margin: 15px;  border:3px solid lightgray; width: 400px; height: 400px; 
+.c_product{display:inline-block; margin: 15px;  border:3px solid lightgray; width:310px; height:310px; 
 padding:10px; cursor: pointer;}
-.d_kind3:nth-child(3n) { margin-left: 90px;}
+.d_kind3:nth-child(4n-5) { margin-left: 20px;}
 .c_product .c_p2, .c_product .c_p4 { font-weight:bold; }
 .c_product .c_p2 { font-size: 20px; text-align: left;  margin-left: 21px; color: #ff607f; }
 .c_product .c_p3{font-size:1.1em; text-align: left; margin-left: 21px; font-weight: bold; margin-top: 8px;}
@@ -51,8 +51,21 @@ document.addEventListener("DOMContentLoaded", function(){
 		location = 'shopAll.jsp?product_kind='+product_kind.value+"&#t_kind";
 	})
 	
-
+	let images_list = [];
 	
+	let boxes = document.querySelectorAll(".c_product");
+	let images = document.querySelectorAll(".images");
+	for(let i=0; i<images.length; i++) {
+		images_list.push(images[i].value);
+		
+	}
+	
+	for(let box of boxes){
+		box.addEventListener("onmouseover", function(){
+			console.log(images_list);
+			
+		})
+	}
 	
 	
 	
@@ -86,7 +99,7 @@ ProductDAO productDAO = ProductDAO.getInstance();
 
 //########## 페이징(paging) 처리 ##########
 //페이징(paging) 처리를 위한 변수 선언
-int pageSize = 9; // 1페이지에 12건의 게시글을 보여줌.
+int pageSize = 12; // 1페이지에 12건의 게시글을 보여줌.
 String pageNum = request.getParameter("pageNum"); // 페이지 번호
 if(pageNum == null) pageNum = "1";                // 페이지 번호가 없다면 1페이지로 설정
 
@@ -132,12 +145,12 @@ List<ProductDTO> productList = productDAO.getProductList(startRow, pageSize, pro
 			int price = product.getProduct_price();
 			int d_rate = product.getDiscount_rate();
 			int sale_price = price - (price * d_rate/100);
-			
 		%>
 			<div class="d_kind3">
+			
 				<div class="c_product">
 				<a href="shopContent.jsp?product_id=<%=product.getProduct_id() %>">
-					<div class="c_p1"><img src="/images_camera/<%=product.getProduct_image1() %>" name="camera_image" width="320" height="300" class= "images"></div>
+					<div class="c_p1"><img src="/images_camera/<%=product.getProduct_image1() %>" width="220" height="200" class= "images"></div>
 					<div class="c_p2"><span title="<%=product.getProduct_com() %>"><%=product.getProduct_com() %></span></div>
 					<div class="c_p3"><span title="<%=product.getProduct_name() %>"><%=product.getProduct_name() %></span> </div>
 					<div class="c_p4">

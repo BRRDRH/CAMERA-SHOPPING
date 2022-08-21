@@ -4,13 +4,13 @@ import java.sql.Timestamp;
 
 public class BuyDTO {
 
-	private int buy_id;
+	private String buy_id;
 	private String buyer;
 	private int product_id;
 	private String product_name;
 	private int buy_price;
 	private int buy_count;
-	private String product_image;
+	private String product_image1;
 	private Timestamp buy_date;
 	private String account;
 	private String delivery_name;
@@ -18,11 +18,11 @@ public class BuyDTO {
 	private String delivery_address;
 	private String delivery_state;
 
-	public int getBuy_id() {
+	public String getBuy_id() {
 		return buy_id;
 	}
 
-	public void setBuy_id(int buy_id) {
+	public void setBuy_id(String buy_id) {
 		this.buy_id = buy_id;
 	}
 
@@ -66,12 +66,12 @@ public class BuyDTO {
 		this.buy_count = buy_count;
 	}
 
-	public String getProduct_image() {
-		return product_image;
+	public String getProduct_image1() {
+		return product_image1;
 	}
 
-	public void setProduct_image(String product_image) {
-		this.product_image = product_image;
+	public void setProduct_image1(String product_image1) {
+		this.product_image1 = product_image1;
 	}
 
 	public Timestamp getBuy_date() {
@@ -126,7 +126,7 @@ public class BuyDTO {
 	public String toString() {
 		return "BuyDTO [buy_id=" + buy_id + ", buyer=" + buyer + ", product_id=" + product_id + ", product_name="
 				+ product_name + ", buy_price=" + buy_price + ", buy_count=" + buy_count + ", product_image="
-				+ product_image + ", buy_date=" + buy_date + ", account=" + account + ", delivery_name=" + delivery_name
+				+ product_image1 + ", buy_date=" + buy_date + ", account=" + account + ", delivery_name=" + delivery_name
 				+ ", delivery_tel=" + delivery_tel + ", delivery_address=" + delivery_address + ", delivery_state="
 				+ delivery_state + "]";
 	}

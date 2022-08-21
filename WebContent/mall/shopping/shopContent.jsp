@@ -8,7 +8,7 @@
 <title>상품상세</title>
 <style>
 
-.container {width: 95%; margin: 0 auto;}
+.container {width: 100%; margin: 0 auto;}
 .d_kind {margin-top: 30px; margin-left: 200px; margin-bottom: 50px;}
 
 .d_kind a { text-decoration:none; color: #32aaff; font-weight:bold; margin: 40px; font-size:18px; }
@@ -59,7 +59,8 @@ text-align:center; line-height:30px; border-radius:5px; color:#fff; font-size:1.
 .s3_c1 span:hover { border: 2px solid #fff; font-weight:bold; }
 .s3_c2 { line-height:40px; text-align: center; padding:20px;}
 
-.s3_c3 .s3_review { line-height:27px; text-align:justify; padding:20px; width: 100%; height: 200px;  margin-bottom:10px;}
+.s3_c3_top { text-align: left; margin-left: 300px; margin-bottom: 10px; font-weight: bold; color:f7f8f0; }
+.s3_c3 .s3_review  { line-height:27px; text-align:justify; padding:20px; width: 100%; height: 200px;  margin-bottom:10px;}
 .s3_review .s3_r1 { width:75%; float:left; border:1px solid #f1f3f5; padding:20px; background:#f7f8f0; margin-right:20px;}
 .s3_r1 .s3_subject { font-size:1.1em; font-weight:bold; margin-bottom:10px;}
 .s3_r1 .s3_content { width:100%; height:110px; white-space:pre-line; overflow:hidden;}
@@ -156,6 +157,11 @@ int product_id = Integer.parseInt(request.getParameter("product_id"));
 ProductDAO productDAO = ProductDAO.getInstance();
 ProductDTO product = productDAO.getProduct(product_id);
 
+//개인 쇼핑몰에서 이미지가  5장이고, 1번만 not null이고, 나머지가  nothing.jpg가 저장되어 있다고 가정할 때
+String product_image1 = product.getProduct_image1();
+if(product.getProduct_image2() == null) product.setProduct_image2(product_image1);
+if(product.getProduct_image3() == null) product.setProduct_image3(product_image1);
+
 //회원 DB 연결, 질의 - 세션의 여부 확인
 MemberDAO memberDAO = null;
 MemberDTO member = null;
@@ -251,10 +257,6 @@ int d_rate = product.getDiscount_rate();
 int sale_price = price - (price * d_rate/100);
 
 
-// 개인 쇼핑몰에서 이미지가  5장이고, 1번만 not null이고, 나머지가  nothing.jpg가 저장되어 있다고 가정할 때
-String product_image1 = product.getProduct_image1();
-if(product.getProduct_image2() == null) product.setProduct_image2(product_image1);
-if(product.getProduct_image3() == null) product.setProduct_image3(product_image1);
 
 %>
 </head>
@@ -323,6 +325,7 @@ if(product.getProduct_image3() == null) product.setProduct_image3(product_image1
 		<div class="s3">
 			<div class="s3_c1"><span class="ss1">상세설명</span><span class="ss2">리뷰</span><span class="ss3">상품문의</span><span class="ss4">교환/반품</span></div>
 			<div class="s3_c2"><img src="/images_camera/<%=product.getProduct_content() %>"></div>
+			<div class="s3_c3_top">게시물 개수 : <%=cnt %> 개</div>
 			<div class="s3_c3" id="s3">
 				<table class="review_table">
 					<tr>
@@ -331,9 +334,21 @@ if(product.getProduct_image3() == null) product.setProduct_image3(product_image1
 						<th width="15%">작성자</th>
 						<th width="15%">작성일</th>
 					</tr>
-					<tr>
-						<td colspan="4">작성된 상품평이 없습니다.</td>
-					</tr>
+					<% for(ReviewDTO review : reviewList) {   
+					
+						if(review.getContent() == null){ %>
+							<tr>
+								<td colspan="4">작성된 상품평이 없습니다.</td>
+							</tr>
+					<%} else { %>
+							<tr>
+								<td><%=review.getNum() %></td>
+								<td><%=review.getSubject() %></td>
+								<td><%=review.getMember_id() %></td>
+								<td><%=review.getRegDate() %></td>
+							</tr>
+					<%} }%>
+					
 				</table>
 			<div id="paging">
 			<%

@@ -81,7 +81,7 @@ String memberId = (String)session.getAttribute("memberId");
 		<div class="t_box2"> <%-- 구역2(상단 우측) : 회원정보, 구매정보, 장바구니 정보 --%>
 			<div class="t_box2_a">
 				<a href="../member/memberInfoForm.jsp"><img src="../../icons/user1.png" width="40" class="t_b2_img1" title="회원정보"></a>&emsp;&emsp;
-				<a href=""><img src="../../icons/buy3.png" width="40" class="t_b2_img2" title="구매정보"></a>&emsp;&emsp;
+				<a href="../buy/buyList.jsp"><img src="../../icons/buy3.png" width="40" class="t_b2_img2" title="구매정보"></a>&emsp;&emsp;
 				<a href="../cart/cartList.jsp"><img src="../../icons/cart3.png" width="40" class="t_b2_img3" title="장바구니"></a>
 			</div>
 		</div>

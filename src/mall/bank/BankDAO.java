@@ -53,7 +53,7 @@ public class BankDAO {
 	
 	
 	// 카드 삭제 (1개)
-	public void deleteBank(String member_id, String card_no) {
+	public void deleteBank(String card_no) {
 		String sql = "delete from bank where card_no=?";
 		
 		try {

@@ -1,22 +1,22 @@
 <%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="mall.cart.*, mall.member.*, mall.bank.*" %> 
-<%@ page import="java.util.*" %>   
+<%@ page import="mall.cart.*, mall.member.*, mall.bank.*, manager.product.*" %> 
+<%@ page import="java.util.*, java.lang.*" %>   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>구매확인폼</title>
 <style>
-.container { width: 95%; margin: 0 auto;}
+.container { width:95%; margin: 0 auto;}
 .buy_form { width: 100%;}
 /* 상단 1  */
-.d1 { width:40%;   text-align: right; margin-left: 50px; margin-top: 38px; display: inline-block;}
-.d1 .s1 { font-size:1.1em; font-weight: bold; }
+.d1 { width:40%; padding:15px; margin: 15px 45px; float:left; display: inline-block;}
+.d1 .s1 { font-size:1.1em; font-weight: bold; margin-right: 30px;}
 .d1 .s2 { display: inline-block; width: 120px; text-align: center; font-size: 0.8em; font-weight: bold;  
 padding: 6px 17px; border: 1px solid #333; font-size: 0.8em; border-radius: 15px; font-weight:bold; background: #443cc3; color:#fff;}
-.d1 .s3 { width: 300px; padding: 6px 17px; border: 1px solid gray; font-size: 0.8em; border-radius: 15px; font-weight:bold; background:#fff; color:#333;}
+.d2 .s3 { width: 300px; padding: 6px 17px; border: 1px solid gray; font-size: 0.8em; border-radius: 15px; font-weight:bold; background:#fff; color:#333;}
 
 /* 상단 2  */
 .d2 { width: 40%; padding: 15px; margin: 5px 45px; float: left; display: inline-block; text-align: left;}
@@ -97,6 +97,7 @@ border-radius: 5px; cursor: pointer; margin-right: 10px;}
 .tr_card_insert_td input[type=text] { width: 200px; margin-right: 5px;}
 .tr_card_insert_td input[type=button] { background: #1e94be; border: 1px solid #1e94be;}
 .tr_card_insert_hidden { display: none;}
+
 /*  중단 - d7 결제   */
 .d7 { margin: 20px 0;}
 .d7 .t5 { width: 90%; border : 1px solid gray; border-collapse: collapse; margin: 0 auto; font-size: 0.9em; 
@@ -118,6 +119,9 @@ font-size: 1em; cursor: pointer; font-weight: bold; border-radius: 5px; margin: 
 document.addEventListener("DOMContentLoaded", function(){
 	let form = document.buyForm;
 	let cart_id = form.cart_id.value;
+	let product_id = form.product_id.value;
+	let buy_count = form.buy_count.value;
+	let part = form.part.value;
 	// 주소 찾기 버튼  - 다음 라이브러리 활용
 	let btn_address = document.getElementById("btn_address");
 	// daum의 라이브러리를 활용한 주소 찾기 문법
@@ -145,10 +149,22 @@ document.addEventListener("DOMContentLoaded", function(){
 	let btn_delete_bank = document.getElementById("btn_delete_bank");
 	btn_delete_bank.addEventListener("click", function(){
 		let account = form.account;
+		if(account.value == 0) {
+			alert("삭제할 카드를 선택해 주세요");
+			return;
+		}
 		let value = account.options[account.selectedIndex].value;
 		let card_no = value.substring(0, 19);
 		account.remove(account.selectedIndex);
-		location = "../bank/bankDeletePro.jsp?cart_id=" + cart_id +"&card_no=" + card_no;
+		
+		if(part==1) {
+			location = "../bank/bankDeletePro.jsp?product_id=" + product_id +"&card_no=" + card_no + "&buy_count=" + buy_count + "&part=1";
+		} else if(part == 2) {
+			location = "../bank/bankDeletePro.jsp?product_id=" + product_id +"&card_no=" + card_no + "&buy_count=" + buy_count + "&part=2";
+		}else if(part == 3) {
+			location = "../bank/bankDeletePro.jsp?cart_id=" + cart_id +"&card_no=" + card_no + "&part=3";
+		}
+		
 	})
 	
 	// 카드 등록 버튼 클릭 했을 때
@@ -164,8 +180,50 @@ document.addEventListener("DOMContentLoaded", function(){
 		let card_com = document.querySelector(".card_com").value;
 		let member_id = document.querySelector(".member_id").value;
 		let member_name = document.querySelector(".member_name").value;
-		location = "../bank/bankInsertPro.jsp?cart_id=" + cart_id + "&card_no=" + card_no +"&card_com=" + card_com +"&member_id=" +member_id + "&member_name=" +member_name;
+		if(!card_no) {
+			alert("카드 번호를 입력하시오.");
+			return;
+		}
+		if(!card_com) {
+			alert("은행명을 입력하시오");
+			return;
+		}
+		if(part==1) {
+			location = "../bank/bankInsertPro.jsp?product_id=" + product_id + "&card_no=" + card_no +"&card_com=" + card_com +"&member_id=" +member_id + "&member_name=" +member_name + "&part=1"+ "&buy_count=" +buy_count;
+		} else if(part == 2) {
+			location = "../bank/bankInsertPro.jsp?product_id=" + product_id + "&card_no=" + card_no +"&card_com=" + card_com +"&member_id=" +member_id + "&member_name=" +member_name + "&part=2"+ "&buy_count=" +buy_count;
+		}else if(part == 3) {
+			location = "../bank/bankInsertPro.jsp?cart_id=" + cart_id + "&card_no=" + card_no +"&card_com=" + card_com +"&member_id=" +member_id + "&member_name=" +member_name + "&part=3";
+		}
 	})
+	
+	// 최종 결제 버튼
+	let btn_buy = document.getElementById("btn_buy");
+	btn_buy.addEventListener("click",function(){
+		if(!form.delivery_name.value) {
+			alert('수령인 이름을 입력하시오');
+			return;
+		}
+		if(!form.delivery_tel.value) {
+			alert('연락처를 입력하시오');
+			return;
+		}
+		if(!form.delivery_address1.value) {
+			alert('기본주소를 입력하시오');
+			return;
+		}
+		if(!form.delivery_address2.value) {
+			alert('상세주소을 입력하시오');
+			return;
+		}
+		if(!form.account.value) {
+			alert('결제 카드를 선택하시오');
+			return;
+		}
+		form.submit();
+	})
+	
+	
 })
 
 </script>
@@ -227,27 +285,65 @@ int week = cal.get(Calendar.DAY_OF_WEEK); // 1~7
 String[] weekday = {"일","월","화","수","목","금","토"};
 String d_day = month + "월 " + date + "일 (" +weekday[week-1] +")";
 
-// cartList.jsp에서 넘어오는 cart_id를 확인, 배열 -> 리스트로 저장
-String cart_id_str = request.getParameter("cart_id");
-String[] cart_id_arr = cart_id_str.split(",");
+//####################################################
+// 1. part = 1일 때는 shopMain.jsp에서 product_id를 가지고 넘어오는 경우
+// 2. part=2 일 때는 shopContent.jsp에서 product_id와 buy_count를 가지고 넘어오는 경우
+// 3. part=3일 때는 cartList.jsp에서 cart_id를 가지고 넘어오는 경우
+List<CartDTO> cartList = null;
+int part = Integer.parseInt(request.getParameter("part"));
 
-List<Integer> cart_id_list = new ArrayList<Integer>();
-for(String c : cart_id_arr){
-	cart_id_list.add(Integer.parseInt(c));
+// part==1일 때, part==2일 때 변수 선언
+int product_id = 0;
+int buy_count = 1;
+
+// part==3일 때 변수 선언
+String cart_id_str = null;
+String[] cart_id_arr = null;
+List<Integer> cart_id_list = null;
+CartDAO cartDAO = null;
+ProductDAO productDAO = null;
+
+if(part==1 || part==2) {
+	
+	product_id = Integer.parseInt(request.getParameter("product_id"));
+	if(part==2) buy_count = Integer.parseInt(request.getParameter("buy_count"));
+	cartList = new ArrayList<>();
+	productDAO = ProductDAO.getInstance();
+	ProductDTO product = productDAO.getProduct(product_id);
+	int product_price = product.getProduct_price();
+	int discount_rate = product.getDiscount_rate();
+	int buy_price = product_price - (product_price * discount_rate / 100);
+	CartDTO cart = new CartDTO();
+	
+	cart.setBuyer(memberId);
+	cart.setProduct_id(product_id);
+	cart.setProduct_name(product.getProduct_name());
+	cart.setProduct_com(product.getProduct_com());
+	cart.setProduct_country(product.getProduct_country());
+	cart.setProduct_price(product_price);
+	cart.setDiscount_rate(discount_rate);
+	cart.setBuy_price(buy_price); // 할인된 가격, 판매가
+	cart.setBuy_count(buy_count);
+	cart.setProduct_image1(product.getProduct_image1());
+	cartList.add(cart);
+	
+	
+} else if(part == 3) {
+	// 1. cartList.jsp에서 넘어오는 cart_id를 확인, 배열 -> 리스트로 저장
+	cart_id_str = request.getParameter("cart_id");
+	cart_id_arr = cart_id_str.split(",");
+
+	cart_id_list = new ArrayList<Integer>();
+	for(String c : cart_id_arr){
+		cart_id_list.add(Integer.parseInt(c));
+	}
+
+	// Cart DB연동 -> cartList에서 넘어오는 정보 -> 1개 또는 여러개
+	cartDAO = CartDAO.getInstance();
+	cartList = cartDAO.getCartList(cart_id_list);
 }
-
-// 카트 확인
-//System.out.println("카트 : " + Arrays.toString(cart_id_arr));
-//System.out.println("카트 리스트 : " + cart_id_list);
-
-// Cart DB연동 -> cartList에서 넘어오는 정보 -> 1개 또는 여러개
-CartDAO cartDAO = CartDAO.getInstance();
-List<CartDTO> cartList = cartDAO.getCartList(cart_id_list);
-
-
-
-// CartList 정보 1개
-//CartDTO cart = cartDAO.getCart(cart_id);
+session.setAttribute("cartList", cartList);
+//####################################################
 
 // Member DB연동 
 
@@ -271,8 +367,11 @@ int tot1=0, tot2=0, tot3=0, cnt1=0, cnt2=0;
 			<img src="../../icons/progress02.PNG" width="450" height="70">
 		</div>
 		<hr class="d_line">
-		<form action="buyList.jsp" method="post" name="buyForm">
-		<input type="hidden" id="cart_id" value="<%=cart_id_str %>">
+		<form action="buyInsertPro.jsp" method="post" name="buyForm">
+		<!-- cart_id, buy_count, account, delivery_name, delivery_tel, delivery_address1, delivery_address2 -->
+		<input type="hidden" name="cart_id" value="<%=cart_id_str %>">
+		<input type="hidden" name="product_id" value="<%=product_id %>">
+		<input type="hidden" name="part" value="<%=part %>">
 		<div class="d3"> <!-- 카트 정보 -->
 			<table class="t1">
 				<tr>
@@ -297,10 +396,10 @@ int tot1=0, tot2=0, tot3=0, cnt1=0, cnt2=0;
 				
 					<tr>
 						<td width="10%">
-							<a href="../shopping/shopContent.jsp?product_id=<%=cart.getProduct_id() %>"><img src="/images_camera/<%=cart.getProduct_image1() %>" width="100" height="140"> </a>
+							<a href="../shopping/shopContent.jsp?product_id=<%=cart.getProduct_id() %>"><img src="/images_camera/<%=cart.getProduct_image1() %>" width="60" height="90"> </a>
 						</td>
 						<td width="40%">
-							<a href="../shopping/shopContent.jsp?product_id=<%=cart.getProduct_id() %>"><span><%=cart.getProduct_name() %> - <%=cart.getProduct_color() %></span></a><br><br>
+							<a href="../shopping/shopContent.jsp?product_id=<%=cart.getProduct_id() %>"><span><%=cart.getProduct_name() %></span></a><br><br>
 							<span><%=cart.getProduct_com() %> | <%=cart.getProduct_country() %></span>
 						</td>
 						<td width="10%" class="right"><span class="s3"><%=df.format(cart.getProduct_price()) %>원</span></td>
